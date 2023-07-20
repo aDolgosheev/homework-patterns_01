@@ -1,11 +1,14 @@
 package Task_01;
 
+import java.util.Objects;
+import java.util.OptionalInt;
+
 public class Person {
 
     private final String name;
     private final String surname;
     private int age;
-    private String Address;
+    private String address;
 
     public Person(String name, String surname) {
         this.name = name;
@@ -26,16 +29,16 @@ public class Person {
         return surname;
     }
 
-    public int getAge() {
-        return age;
+    public OptionalInt getAge() {
+        return OptionalInt.of(age);
     }
 
-    public String getCity() {
-        return Address;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddress(String city) {
-        this.Address = city;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void happyBirthday() {
@@ -47,6 +50,24 @@ public class Person {
     }
 
     public boolean hasAddress() {
-        return Address != null;
+        return address != null;
+    }
+
+    public PersonBuilder newChildBuilder() {
+        return new PersonBuilder().setSurname(surname).setAddress(address);
+    }
+
+    @Override
+    public String toString() {
+        return "Человек:\n" +
+                "Имя: " + name +
+                "\nФамилия: " + surname +
+                "\nВозраст: " + age +
+                "\nАдрес: " + address;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname);
     }
 }
